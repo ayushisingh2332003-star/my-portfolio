@@ -1,56 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>My Portfolio</title>
+  <title>Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background-color: #f0f0f0; color: #333; }
-    nav { background-color: #6c63ff; padding: 15px; text-align: center; }
-    nav a { color: white; text-decoration: none; margin: 0 15px; font-size: 18px; }
-    .hero { background-color: #6c63ff; color: white; text-align: center; padding: 80px 20px; }
-    .hero h1 { font-size: 48px; margin-bottom: 10px; }
-    .hero p { font-size: 20px; }
-    .about { background-color: white; padding: 50px 20px; text-align: center; }
-    .about h2 { font-size: 32px; color: #6c63ff; margin-bottom: 15px; }
-    .skills { background-color: #f0f0f0; padding: 50px 20px; text-align: center; }
-    .skills h2 { font-size: 32px; color: #6c63ff; margin-bottom: 20px; }
-    .skill-box { display: inline-block; background-color: #6c63ff; color: white; padding: 10px 25px; margin: 8px; border-radius: 25px; font-size: 16px; }
-    .contact { background-color: white; padding: 50px 20px; text-align: center; }
-    .contact h2 { font-size: 32px; color: #6c63ff; margin-bottom: 15px; }
-    footer { background-color: #6c63ff; color: white; text-align: center; padding: 15px; }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #1a1a2e;
+      margin: 0;
+    }
+    .calculator {
+      background-color: #16213e;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 30px rgba(108, 99, 255, 0.5);
+    }
+    #display {
+      width: 100%;
+      padding: 15px;
+      font-size: 28px;
+      text-align: right;
+      background-color: #0f3460;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    button {
+      padding: 18px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #6c63ff;
+      color: white;
+    }
+    button:hover {
+      background-color: #574fd6;
+    }
+    .btn-clear {
+      background-color: #e94560;
+    }
+    .btn-equal {
+      background-color: #6c63ff;
+      grid-column: span 2;
+    }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="hero">
-    <h1>Hi, I am Ayushi! 👋</h1>
-    <p>Computer Science Student | Web Developer</p>
+  <div class="calculator">
+    <input type="text" id="display" disabled placeholder="0">
+    <div class="buttons">
+      <button class="btn-clear" onclick="clearDisplay()">C</button>
+      <button onclick="backspace()">⌫</button>
+      <button onclick="appendValue('%')">%</button>
+      <button onclick="appendValue('/')">÷</button>
+      <button onclick="appendValue('*')">×</button>
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="appendValue('-')">-</button>
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('+')">+</button>
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="appendValue('.')">.</button>
+      <button onclick="appendValue('0')">0</button>
+      <button class="btn-equal" onclick="calculate()">=</button>
+    </div>
   </div>
-  <div class="about" id="about">
-    <h2>About Me</h2>
-    <p>I am a 2nd year B.Tech CSE student at Buddha Institute of Technology.</p>
-    <p>I am passionate about coding, learning new technologies and building cool projects!</p>
-  </div>
-  <div class="skills" id="skills">
-    <h2>My Skills</h2>
-    <div class="skill-box">HTML</div>
-    <div class="skill-box">CSS</div>
-    <div class="skill-box">JavaScript</div>
-    <div class="skill-box">Java</div>
-    <div class="skill-box">Python</div>
-  </div>
-  <div class="contact" id="contact">
-    <h2>Contact Me</h2>
-    <p>Email: ayushi@email.com</p>
-    <p>GitHub: github.com/ayushi</p>
-  </div>
-  <footer>
-    <p>Made by Ayushi ❤️</p>
-  </footer>
+
+  <script>
+    function appendValue(val) {
+      document.getElementById('display').value += val;
+    }
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+    }
+    function backspace() {
+      let val = document.getElementById('display').value;
+      document.getElementById('display').value = val.slice(0, -1);
+    }
+    function calculate() {
+      let result = eval(document.getElementById('display').value);
+      document.getElementById('display').value = result;
+    }
+  </script>
 </body>
 </html>
